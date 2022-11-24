@@ -145,6 +145,7 @@ class XposedInit : IXposedHookLoadPackage, IXposedHookZygoteInit {
         ModifyDockHook().init()  // 安卓12底栏设置
         EnableAllAppsContainerViewBlur().init()  // 安卓12抽屉模糊
         ResourcesHook().init() // 资源相关
+        ModifyWallpaperStatusBarColor().init() //状态栏壁纸颜色
     }
 
     fun checkVersionName(): String {

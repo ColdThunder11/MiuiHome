@@ -135,6 +135,7 @@ object DataHelper {
             add(Item(list = arrayListOf(TextWithSwitchV(TextWithSummaryV(titleResId = R.string.HideTaskViewSmallWindowIcon), "smallWindow"))))
             add(Item(list = arrayListOf(TextWithSwitchV(TextWithSummaryV(titleResId = R.string.CategoryHideAll), "categoryHideAll"))))
             add(Item(list = arrayListOf(TextWithSwitchV(TextWithSummaryV(titleResId = R.string.CategoryPagingHideEdit), "CategoryPagingHideEdit"))))
+            add(Item(list = arrayListOf(TextV(resId = R.string.CustomWallpaperColor, onClickListener = { showCustomWallpaperColorModeDialog() }))))
             add(Item(list = arrayListOf(TextV(resId = R.string.CustomTitleColor, onClickListener = { showCustomTitleColorDialog() }))))
             add(Item(list = arrayListOf(TextV(resId = R.string.IconTitleTopMargin, onClickListener = { showModifyIconTitleTopMarginDialog() }))))
             add(Item(list = arrayListOf(TextV(resId = R.string.IconTitleFontSize, onClickListener = { showIconTitleFontSizeDialog() }))))
@@ -291,6 +292,21 @@ object DataHelper {
                     Thread.sleep(1000)
                     exitProcess(0)
                 }
+            }
+            setLButton(R.string.Cancel) { dismiss() }
+            show()
+        }
+    }
+
+    private fun showCustomWallpaperColorModeDialog() {
+        CustomDialog(currentActivity).apply {
+            setTitle(R.string.CustomWallpaperColor)
+            setMessage(R.string.CustomWallpaperColorTips)
+            setEditText("", "${moduleRes.getString(R.string.current)}: ${OwnSP.ownSP.getString("statusBarColorMode", "").toString()}")
+            setRButton(R.string.Yes) {
+                editor.putString("statusBarColorMode", getEditText())
+                editor.apply()
+                dismiss()
             }
             setLButton(R.string.Cancel) { dismiss() }
             show()
